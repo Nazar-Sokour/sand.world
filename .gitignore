@@ -1,3 +1,5 @@
 
+.vscode
+prj/vscode/
 README
 prj/createhardlinks.sh
