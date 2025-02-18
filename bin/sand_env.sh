@@ -1,0 +1,1 @@
+../../../../src/bin/sand/sand_env.sh
