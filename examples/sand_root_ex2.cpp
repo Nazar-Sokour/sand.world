@@ -2,34 +2,30 @@
 /*
  *  This example demonstrates how you can work with the sand procedure in the ROOT framework.
  *  Required libraries: CommonUtils, FuncUtils, SpectrumUtils
- *  Required root libraries: Core, Hist
- *  The example consists of six parts, which include the full cycle of work, from reading a spectrum from an external file
- *  to writing the result into an output file.
- *  Part 1 - Put the initial spectrum into the 'NS_spectrum' structure.
- *           This part can be skipped If you use another way to obtain a histogram for the sand procedure.
- *  Part 2 - Read the calibration coefficients.
- *           You may read the coefficients in any other way you wish or set them directly in your code.
- *  Part 3 - Calculate the x-axis energies using the initial calibration coefficients obtained in Part 2.
- *           This part can also be skipped if you use another way to obtain histogram for the sand procedure.
- *  Part 4 - Fill the first 'NS_spectrum_root' structure ('spectrumOldRoot' variable in this example)
- *           with the initial histogram (field 'data' in 'NS_spectrum_root') and calibration coefficients (field 'calibcoef' in 'NS_spectrum_root').
- *           Fill the second 'NS_spectrum_root' structure ('spectrumNewRoot' variable) with the final calibration coefficients.
- *  Part 5 - Execute the sand procedure.
- *  Part 6 - Write the result into an output text file.
  *
- *  This is just an example, and some errors may occur if the input files have an incorrect format.
+ *  The example consists of six parts, covering the full cycle of work, from reading a spectrum from an external text file
+ *  to writing the result into an output text file.
+ *  Part 1 - Put the initial spectrum into the 'NS_spectrum' structure.
+ *  Part 2 - Put both the initial and final calibration coefficients into the 'NS_spectrum_root' structures.
+ *  Part 3 - Calculate and put the x-axis energies using the initial calibration coefficients obtained in Part 2 in 'spectrumOldRoot' structure.
+ *           (This part can be skipped if you have already done it in another way, for example, by reading from an external file in Part 1).
+ *  Part 4 - Create and fill the initial histogram inside the 'spectrumOldRoot' structure.
+ *  Part 5 - Execute the sand procedure.
+ *  Part 6 - Write the result to an output text file.
+ *
+ *  Some errors may occur if the input files have an incorrect format.
  */
 
-/* These includes are required by R__ADD_INCLUDE_PATH, R__ADD_LIBRARY_PATH and R__LOAD_LIBRARY macros */
+/* Functions with the prefix "NS_" are in 'SpectrumUtils', 'CommounUtils' and 'FuncUtils' libraries */
+
+/* The next includes are required by R__ADD_INCLUDE_PATH, R__ADD_LIBRARY_PATH and R__LOAD_LIBRARY ROOT macros */
 #include "root/Rtypes.h"
 #include "root/TROOT.h"
 
-/* You need to add include path to 'SpectrumUtils', 'CommonUtils', 'FuncUtils' headers.
- * In this example I used R__ADD_INCLUDE_PATH root macro.
- * Put the include path into argument of R__ADD_INCLUDE_PATH depending on your case. */
-R__ADD_INCLUDE_PATH(../../include)
-
-/* These includes are required by functions with prefix "NS_" */
+/* We need to add the include path for 'SpectrumUtils', 'CommonUtils', and 'FuncUtils' headers.
+ * In this example, we use R__ADD_INCLUDE_PATH ROOT macro.
+ * Set the include path as an argument to R__ADD_INCLUDE_PATH according to your setup. */
+R__ADD_INCLUDE_PATH(../include)
 #include "NS/SpectrumUtils.hxx"
 #include "NS/CommonUtils.hxx"
 #include "NS/FuncUtils.hxx"
@@ -40,38 +36,38 @@ R__ADD_INCLUDE_PATH(../../include)
 #include <stdlib.h>
 #include <stdio.h>
 
-/* You need to add library path to 'SpectrumUtils', 'CommonUtils', 'FuncUtils' libraries.
- * In this example I used R__ADD_LIBRARY_PATH root macro.
- * Put the library path into argument of R__ADD_LIBRARY_PATH depending on your case. */
-R__ADD_LIBRARY_PATH(../../../build/gcc/Release/lib)
-/* Load libraries required by 'NS_SpectrumSANDRoot' function */
+/* We need to load 'SpectrumUtils', 'CommonUtils', 'FuncUtils' libraries.
+ * In this example, we use R_ADD_LIBRARY_PATH ROOT macro for adding library path and
+ * R__LOAD_LIBRARY ROOT macro for loading library.
+ * Set the library path as an argument to R__ADD_LIBRARY_PATH according to your setup. */
+R__ADD_LIBRARY_PATH(../lib)
 R__LOAD_LIBRARY(CommonUtils)
 R__LOAD_LIBRARY(FuncUtils)
 R__LOAD_LIBRARY(SpectrumUtils)
 
 #define IFILE "sand_sp1.dat"
 #define OFILE "sand_output.dat"
-#define CCFILE "sand_spectrum_cc"
 #define IFILEROOT "sand_sp1.root"
 #define OFILEROOT "sand_output.root"
 
 
-int main()
+int sand_root_ex2()
 {
 	int sts;
 	NS_spectrum_root spectrumOldRoot, spectrumNewRoot;
 
+	/* structures must be initialize before using */
 	NS_SpectrumRootInit(&spectrumOldRoot);
 	NS_SpectrumRootInit(&spectrumNewRoot);
 
 	{
-		NS_spectrum spectrumOld; // a structure for a spectrum with initial calibration that should be converted into a spectrum with new calibration
-		long opt; // option how to read/write spectrum from/to a file
-		int ncolumns; // number of columns in input file (see README for more explanation)
+		NS_spectrum spectrumOld; // the structure for a spectrum with the initial calibration that should be converted into the spectrum with the new calibration
+		long opt; // an option for reading/writing a spectrum from/to a file
+		int ncolumns; // number of columns in the input file (see README for more details)
 
 		/*
-		 * Part 1: put initial spectrum into 'NS_spectrum' structure.
-		 *         In this example, I read the spectrum from an external text file (see the IFILE macro) into the 'spectrumOld' structure.
+		 * Part 1: Put the initial spectrum into 'NS_spectrum' structure.
+		 *         In this example, we read the spectrum from an external text file (see IFILE macro) into 'spectrumOld' structure.
 		 */
 		/* structure must be initialize before using */
 		NS_SpectrumInit(&spectrumOld);
@@ -89,22 +85,21 @@ int main()
 		}
 
 		/*
-		 * Part 2: put both the initial and final calibration coefficients into the 'NS_spectrum_root' structures.
-		 *         In this example, I read both the initial and final calibration coefficients from an external file (see the CCFILE macro)
-		 *         and put them into 'spectrumOldRoot' and 'spectrumNewRoot', respectively.
+		 * Part 2: Put both the initial and final calibration coefficients into 'NS_spectrum_root' structures.
+		 *         In this example, we set them directly in the source code.
 		 */
-		sts = NS_ReadCalibrationCoeffiecients(CCFILE, &spectrumOldRoot.calibcoef, &spectrumNewRoot.calibcoef);
-		if (0 != sts) { // some error occured
-			goto L_ret_from_routine;
-			/* NOTREAHCED */
-		}
+		NS_AbsBufPushBack< double >(&spectrumOldRoot.calibcoef, 1);
+		NS_AbsBufPushBack< double >(&spectrumOldRoot.calibcoef, 1);
+		NS_AbsBufPushBack< double >(&spectrumNewRoot.calibcoef, 2.61);
+		NS_AbsBufPushBack< double >(&spectrumNewRoot.calibcoef, 1.12);
+		NS_AbsBufPushBack< double >(&spectrumNewRoot.calibcoef, 0.01);
 
 		/*
-		 * Part 3: calculate the energies of the x-axis using the initial calibration coefficients obtained in Part 2.
+		 * Part 3: Calculate and put the x-axis energies using the initial calibration coefficients obtained in Part 2 in 'spectrumOldRoot' structure.
 		 */
-		double *datax, *datay; // array for the x-saxis (in energy units) and the y-axis of the spectrum, respectively
-		double *cc; // array of the calibration coefficients
-		unsigned polPow; // power of polynom of calibartion curve
+		double *datax, *datay; // arrays for the x-axis (in energy units) and the y-axis of the spectrum, respectively
+		double *cc; // an array of the calibration coefficients
+		unsigned polPow; // the power of the polynomial of the calibartion curve
 
 		cc = NS_AbsBufPtr< double >(&spectrumOldRoot.calibcoef, 0);
 		polPow = NS_AbsBufCount< double >(&spectrumOldRoot.calibcoef) - 1;
@@ -114,22 +109,22 @@ int main()
 			datax[i] = NS_PolF(cc, polPow, i);
 		datay = (double *)spectrumOld.data.yv;
 
-		/* push one more value into input spectrum which is the upper edge of the last bin (shouldn't be counted in 'spectrumOld.data') */
+		/* push one more value into the input spectrum, which represents the upper edge of the last bin (it shouldn't be counted in 'spectrumOld.data') */
 		NS_AbstractTabPushBack< double >(&spectrumOld.data, NS_PolF(cc, polPow, NS_AbstractTabCount< double >(&spectrumOld.data)), 0);
 		spectrumOld.data.count -= sizeof(double);
 
 		/*
-		 * Part 4: create and fill TH1 histogram in field 'data' of 'spectrumOldRoot' structure.
+		 *  Part 4: Create and fill the initial histogram inside the 'spectrumOldRoot' structure.
 		 */
 		spectrumOldRoot.data = new TH1D("histSpectrumOld", "initial spectrum", NS_AbstractTabCount< double >(&spectrumOld.data), datax);
 		for (unsigned i = 0; i < spectrumOldRoot.data->GetNbinsX(); i++)
 			spectrumOldRoot.data->SetBinContent(i + 1, datay[i]);
 
-		/* at this point histogram with initial spectrum is ready and I can finalize unnecessary buffer with initial spectrum */
+		/* at this point, the histogram with the initial spectrum is ready, and we can finalize the unnecessary buffer with the initial spectrum */
 		NS_SpectrumFini(&spectrumOld);
 	}
 	{
-		/* save histogram to root file */
+		/* save the histogram to a ROOT file */
 		TFile *stmr = new TFile(IFILEROOT, "recreate");
 		spectrumOldRoot.data->Write();
 		stmr->Close();
@@ -137,7 +132,7 @@ int main()
 	}
 
 	/*
-	 * Part 5: sand procedure.
+	 * Part 5: Execute the sand procedure.
 	 */
 	sts = NS_SpectrumSANDRoot(&spectrumOldRoot, &spectrumNewRoot);
 	if (sts < 0) { // some error occured
@@ -147,11 +142,11 @@ int main()
 	spectrumNewRoot.data->DrawClone("hist");
 
 	{
-		NS_spectrum spectrumNew; // structure for new spectrum with new calibration
-		int ncolumns; // number of columns in output file (see README for more explanation)
+		NS_spectrum spectrumNew; // a structure for the new spectrum with the new calibration
+		int ncolumns; // number of columns in the output file (see README for more details)
 
 		/*
-		 * Part 6: write the result into output text file.
+		 * Part 6: Write the result into an output text file.
 		 */
 		NS_SpectrumInit(&spectrumNew);
 		ncolumns = 2;
