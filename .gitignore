@@ -3,3 +3,4 @@
 prj/vscode/
 prj/README
 prj/createhardlinks.sh
+lib/libSpectrumUtils.so
