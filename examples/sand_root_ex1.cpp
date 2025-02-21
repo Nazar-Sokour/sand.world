@@ -22,6 +22,7 @@
  * In this example, we use R__ADD_INCLUDE_PATH root macro.
  * Set the include path as an argument to R__ADD_INCLUDE_PATH according to your setup. */
 R__ADD_INCLUDE_PATH(../include)
+// R__ADD_INCLUDE_PATH(../../include)
 #include "NS/SpectrumUtils.hxx"
 
 #include "root/TH1.h"
@@ -35,11 +36,12 @@ R__ADD_INCLUDE_PATH(../include)
  * R__LOAD_LIBRARY ROOT macro for loading library.
  * Set the library path as an argument to R__ADD_LIBRARY_PATH according to your setup. */
 R__ADD_LIBRARY_PATH(../lib)
+// R__ADD_LIBRARY_PATH(../../../build/gcc/Release/lib)
 R__LOAD_LIBRARY(SpectrumUtils)
 
-#define CCFILE "sand_spectrum_cc"
 #define IFILEROOT "sand_sp1.root"
 #define HISTNAME "histSpectrumOld"
+#define CCFILE "sand_spectrum_cc"
 #define OFILEROOT "sand_output.root"
 
 
