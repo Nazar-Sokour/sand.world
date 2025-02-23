@@ -1,84 +1,147 @@
-The program convert a spectrum with some (initial) calibration to another spectrum with some another (final) calibration.
 
-The program requires:
-	1. a spectrum. A spectrum should be a text file (input file);
-	2. initial and final calibration coefficients, which can be read from a text file (additional file), program's arguments or set in �interactive� mode.
+NAME
+		sand - a program that converts a spectrum with its own calibration into another spectrum with a different calibration.
 
-Способи запуску програми:
-	1. взаємодійний спосіб (в аргументах програми слід додать окрему опцію ”-i”);
-	2. невзаємодійний спосіб.
+SYNOPSYS
+	UNIX-style usage
+		sand [FILE] -o [FILE] -c [FILE] ...
 
-Програма використовує відомості за наступною першістю:
-	1. з аргументів програми;
-	2. зі змінних середовища;
-	3. усталені значення.
+	GNU-style usage
+		sand [FILE] --opath [FILE] --ccpath [FILE] ...
 
-У взаємодійному способі, в разі недостачі певних відомостей, програма запропонує їх ввести або погодитись на використання усталених значень.
-Натомість у невзаємодійному способі програма буде працювать послідовно за вказаною вище першістю. А в разі невдачі вам повідомлять про відповідну помилку.
+DESCRIPTION
+		sand - a program that converts a spectrum with its own (initial) calibration into another spectrum with a different (final) calibration.
+		The convertion is performed by proportionally splitting the initial bin contents according to the energy bin edges in the final calibration.
+		The program requires:
+			1. a spectrum. The spectrum should be a text file (input file) which may have any extention (.dat, .txt, ...) or no extention at all.
+			2. initial and final calibration coefficients, which can be read from a text file (additional file),
+			   passed as program arguments or set interactively during program's execution in "interactive" mode.
 
-Без опції в аргументах програми можна задать лише шлях вхідного файлу. Якщо в аргументи передано без опції більш ніж одне значення, то буде вказано помилку "Option reuse".
+		Program execution modes:
+			1. standard mode. The program uses predefined values for required variables if they are not set via program arguments or environment variables. 
+			2. interactive method (use the "-u" option). In this mode, the user can manually enter values
+			   if they are not set via program arguments or environment variables. The user can either input value or choose the default one.
+		
+		The program retrieves required variable values in the following order:
+			1. program arguments
+			2. environment variables
+			3. default values
 
-Доступні опції в аргументах програми:
-	-u:
-		взаємодійний спосіб запуску програми
-	-s:
-		програма не перезаписуватиме вихідного файла, якщо файл з такою назвою вже існує (опція наразі не працює)
-	-v:
-		друк в stdout певних проміжних результатів роботи програми
+		The user can specify the path of any file (input, output, or additional) directly (absolute or relative path) or specify the file name and directory separately.
+		If both path and name are provided, the program prioritizes the path.
+		If only the file name is provided, the program will search for the file in:
+			1. the current working directory
+			2. the default directory
 
-Операційні змінні
-	-i, --ifile [NAME]:
-		задать ім'я вхідного файлу
-	-o, --opath [PATH]:
-		задать шлях вихідного файлу
-	-f, --ofile [NAME]:
-		задать ім'я вихідного файлу
-	-c, --ccpath [PATH]:
-		задать шлях допоміжного файлу
-	-h, --ccfile [NAME]:
-		задать ім'я допоміжного файлу
-	-d, --dir [DIRECTORY]:
-		задать диреткорію вхідного/вихідного/допоміжного файлів
-	-n, --icols [NUMBER]:
-		задать кількість стовпчиків у вхідному файлі
-	-k, --ocols [NUMBER]:
-		задать кількість стовпчиків у вихідному файлі
-	-a, --cci [NUMBERS]:
-		встановить початкові калібрувальні коєфіцієнти
-	-b, --cco [NUMBERS]:
-		встановить кінцеві калібрувальні коєфіцієнти
+	Environment variables:
+		SAND_INPUT_PATH:
+			input file path
 
+		SAND_INPUT_NAME:
+			input file name
 
-Доступні змінні середовища:
-	SAND_INPUT_PATH:
-		шлях вхідного файлу
-	SAND_INPUT_NAME:
-		ім’я вхідного файлу
-	SAND_OUTPUT_PATH:
-		шлях вихідного файлу
-	SAND_OUTPUT_NAME:
-		ім’я вихідного файлу
-	SAND_CC_PATH:
-		шлях допоміжного файлу
-	SAND_CC_NAME:
-		ім’я допоміжного файлу
-	SAND_DIR:
-		директорія вхідного/вихідного/допоміжного файлів
+		SAND_OUTPUT_PATH:
+			output file path
 
-Програма надає перевагу шляхам пошуку файлів перед іменами файлів.
-Якщо до якогось із файлу задано ім'я - програма використовуватиме задану директорію файлів.
-Якщо директорію файлів не задано - програма проведе пошук файлів у:
-1) поточній директорії запуску програму
-2) усталеній директорії
+		SAND_OUTPUT_NAME:
+			output file name
 
-Усталені значення:
-	SAND_DIR:
-		“${HOME}/.sand” (не Windows) або “%USERPROFILE%/.sand” (Windows)
-	SAND_INPUT_NAME:
-		“spectrum_input”
-	SAND_OUTPUT_NAME:
-		“spectrum_output”
-	SAND_CC_NAME:
-		“spectrum_cc”
+		SAND_CC_PATH:
+			additional file path
 
+		SAND_CC_NAME:
+			additional file name
 
+		SAND_DIR:
+			directory for input/output/additional files
+
+	Default values:
+		directory:
+			“${HOME}/.sand” (non-Windows) або “%USERPROFILE%/.sand” (Windows)
+
+		input file name:
+			“spectrum_input”
+
+		output file name:
+			“spectrum_output”
+
+		additional file name:
+			“spectrum_cc”
+
+		number of columns in an input file:
+			1
+
+		number of columns in an output file:
+			1
+
+	Option styles
+		In UNIX or short-option style, each option letter is prefixed with a single dash. If an option takes argument, the argument follows it
+		as a separate command line word. Any number of options not taking arguments can be clustered together after a single dash, e.g. -uv.
+
+		The example command in short-option style:
+
+		sand -usv input.txt -h cc.txt
+		or
+		sand -u -s -v input.txt -h cc.txt
+
+		In GNU or long-option style, each option begins with two dashes and has a meaningful name, consisting of lowercase letters.
+		Arguments to long options are supplied as a separate command line word.
+
+		The example command in long-option style:
+
+		sand --ifile input.txt --opath ~/output.txt --ccfile cc.txt --dir .
+
+		Short and long options can be mixed. Reusing an option that requires an argument will cause the program to exit with an "Option reuse" error.
+
+OPTIONS
+	Without arguments:
+		-u:
+			interactive (user) mode.
+		-s:
+			prevents the program from overwriting the output file if a file with the same name already exists (not implemented yet).
+		-v:
+			verbose mode.
+
+	With arguments
+		-i, --ifile [FILE]:
+			sets the input file name.
+
+		-o, --opath [FILE]:
+			sets the output file path.
+
+		-f, --ofile [FILE]:
+			sets the output file name.
+
+		-c, --ccpath [FILE]:
+			sets the additional file path.
+
+		-h, --ccfile [FILE]:
+			sets the additional file name.
+
+		-d, --dir [DIRECTORY]:
+			sets the directory for input/output/additional files.
+
+		-n, --icols [NUMBER]:
+			sets the number of columns in an input file.
+
+		-k, --ocols [NUMBER]:
+			sets the number of columns in an output file.
+
+		-a, --cci [NUMBER]:
+			sets the initial calibration coefficients.
+
+		-b, --cco [NUMBER]:
+			sets the final calibration coefficients.
+
+RETURN VALUES
+		sand exit code indicates whetever it was able to successfully perform the required operation, and if not, what kind of error occured.
+
+		-1   An error occured in the standard C library with an 'errno' error code
+		-2   Invalid argument
+		-3   Reuse of an option with argument
+		-4   Argument not provided
+		-5   Invalid input
+		-6   Input/output error
+
+BUG REPORTS
+		Report bugs to <nazar19681980@gmail.com>.
