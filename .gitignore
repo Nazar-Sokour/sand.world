@@ -2,6 +2,6 @@
 .gitignore.windows
 .vscode
 prj/vscode/
-prj/README_local
+prj/local/
 # prj/createhardlinks.sh
 lib/libSpectrumUtils.so

@@ -1,0 +1,4 @@
+
+For compiling SAND examples you need
+C libraries: CommonUtils, FuncUtils, SpectrumUtils, m
+ROOT libraries: Core, Hist 

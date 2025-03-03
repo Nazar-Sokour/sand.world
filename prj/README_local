@@ -1,4 +1,0 @@
-
-all files in this world are hard links, except:
-prj/createhardlinks.sh
-lin_spectrumutils_lib.sh
