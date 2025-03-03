@@ -1,5 +1,8 @@
 
+<<<<<<< HEAD
 .gitignore.windows
+=======
+>>>>>>> 17a59b5 (gitignore test)
 .vscode
 prj/vscode/
 prj/README_local
