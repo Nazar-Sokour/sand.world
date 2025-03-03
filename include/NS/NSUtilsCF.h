@@ -3,7 +3,7 @@
 # define __NS_UTILS_CF_H__
 
 /* comment the next define if you don't have or need the root data analysis framework */
-# define __CEROOT__
+//# define __CEROOT__
 
 # ifdef __CEROOT__
 // # if defined(__CINT__) || defined(__CLING__) || defined(__ACLIC__)
