@@ -15,4 +15,8 @@ do
 	fi
 done
 
-(cd ${libdir}; gcc -shared -o ${libdir}/libSpectrumUtils.so ${objlist} -Wl,-rpath='${ORIGIN}':${rootlibdir} -L"${libdir}" -L"${rootlibdir}" -lCommonUtils -lFuncUtils ${rootlibs})
+(cd ${libdir}; gcc -shared -o ${libdir}/libSpectrumUtils.so ${objlist} -Wl,-rpath='${ORIGIN}':${rootlibdir} -L"${libdir}" -L"${rootlibdir}" -lCommonUtils -lFuncUtils -lm ${rootlibs})
+
+rootlibdir=
+rootlibs=
+objlist=

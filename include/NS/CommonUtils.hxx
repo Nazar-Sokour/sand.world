@@ -2,12 +2,14 @@
 #ifndef __COMMON_UTILS_HXX__
 # define __COMMON_UTILS_HXX__
 
-# ifdef _WIN32
+# include "NSUtilsCF.h"
+
+# if (defined _WIN32 || defined _WIN64)
 #  include "NS_Win.h"
 # endif
 
 # include <errno.h>
-# include <dirent.h>
+# include "NS_dirent.h"
 # include <stdio.h>
 # include <string.h>
 # include <stdint.h>
