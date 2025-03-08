@@ -8,7 +8,7 @@
 #   if (defined Build_CommonUtils_Lib || defined Build_FuncUtils_Lib || defined Build_SpectrumUtils_Lib)
 #    include <dirent.h>
 #	else
-#	 include "NS_dirent.h"
+#	 include "root-win/root_dirent.h"
 #   endif /* !defined(Build_*Utils_Lib) */
 #  else
 #   include <dirent.h>
