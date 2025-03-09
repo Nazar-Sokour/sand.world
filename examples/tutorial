@@ -1,5 +1,5 @@
 
-There are 3 examples: one for C/C++ compilers and two for executing in ROOT session.
+There are 3 examples: one for C/C++ compilers and two for executing in a ROOT session.
 
 Example for C/C++ compiler:
 Example #1:
@@ -21,7 +21,7 @@ Example #1:
 			function NS_SpectrumInit()
 			function NS_SpectrumSAND()
 
-Examples for ROOT session:
+Examples for a ROOT session:
 Example #2:
 	sand_root_ex1.cpp
 	The example uses an external root file with the input spectrum, a text file with calibration coefficients

@@ -57,7 +57,7 @@ DESCRIPTION
 
 	Default values:
 		directory:
-			“${HOME}/.sand” (non-Windows) або “%USERPROFILE%/.sand” (Windows)
+			“${HOME}/.sand” (Unix) або “%USERPROFILE%/.sand” (Windows)
 
 		input file name:
 			“spectrum_input”
@@ -140,7 +140,7 @@ RETURN VALUES
 		-2   Invalid argument
 		-3   Reuse of an option with argument
 		-4   Argument not provided
-		-5   Invalid input
+		-5   Invalid input (not used)
 		-6   Input/output error
 
 BUG REPORTS
