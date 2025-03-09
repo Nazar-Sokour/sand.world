@@ -2,6 +2,7 @@
 /*
  *  This example demonstrates how you can work with the sand procedure in the ROOT framework.
  *  Required libraries: CommonUtils, FuncUtils, SpectrumUtils
+ *  Load and execute in CLING: .L sand_root_ex2.cpp, sand_root_ex2()
  *
  *  The example consists of six parts, covering the full cycle of work, from reading a spectrum from an external text file
  *  to writing the result into an output text file.
@@ -48,7 +49,6 @@ R__LOAD_LIBRARY(SpectrumUtils)
 #define IFILE "sand_sp1.dat"
 #define OFILE "sand_output.dat"
 #define IFILEROOT "sand_sp1.root"
-#define OFILEROOT "sand_output.root"
 
 
 int sand_root_ex2()

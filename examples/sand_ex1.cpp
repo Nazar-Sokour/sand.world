@@ -1,8 +1,8 @@
 
 /*
  *  This example demonstrates how you can work with the sand procedure in C++.
- *  Required libraries: CommonUtils, FuncUtils, SpectrumUtils, m.
- *  Example of compile command by gcc: gcc sand_ex1.cpp -I"../include" -L"../lib" -lCommonUtils -lFuncUtils -lSpectrumUtils -lm
+ *  Required libraries: CommonUtils, FuncUtils, SpectrumUtils.
+ *  Example of compile command by gcc: gcc sand_ex1.cpp -I"../include" -L"../lib" -lCommonUtils -lFuncUtils -lSpectrumUtils
 
  *  The example consists of five parts:
  *  Part 1 - Put the initial spectrum into the 'NS_spectrum' structure.
@@ -25,8 +25,8 @@
 #include <stdio.h>
 
 #define IFILE "sand_sp1.dat"
-#define OFILE "output.dat"
-#define CCFILE "sand_spectrum_cc"
+#define OFILE "sand_output.dat"
+#define CCFILE "sand_spectrum_cc.dat"
 
 
 int main(int argc, char *argv[])

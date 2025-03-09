@@ -1,6 +1,8 @@
 
 .vscode
+build/**
 prj/vscode/
 prj/local/
-# prj/createhardlinks.sh
 lib/libSpectrumUtils.so
+examples/sand_output.dat
+examples/sand_output.root
