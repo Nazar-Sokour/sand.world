@@ -2,7 +2,7 @@
 /*
  *  This example demonstrates how you can work with the sand procedure in the ROOT framework.
  *  Required library: SpectrumUtils.
- *  Load and execute in CLING: .L sand_root_ex1.cpp, sand_root_ex1()
+ *  Load and execute in ROOT session: .L sand_root_ex1.cpp, sand_root_ex1()
  *
  *  The example consists of four parts:
  *  Part 1 - Put the initial spectrum into the 'NS_spectrum_root' structure.
@@ -14,6 +14,8 @@
  */
 
 /* In this example, all functions with the prefix "NS_" are in 'SpectrumUtils' library */
+
+#include "NS/NSUtilsCF.h"
 
 /* The next includes are required by R__ADD_INCLUDE_PATH, R__ADD_LIBRARY_PATH and R__LOAD_LIBRARY ROOT macros */
 #ifdef _ROOT_INCLUDE_PREFIX

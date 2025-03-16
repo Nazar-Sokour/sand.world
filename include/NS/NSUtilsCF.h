@@ -6,9 +6,10 @@
 # define __CEROOT__
 
 # ifdef __CEROOT__
+// # if defined(__CINT__) || defined(__CLING__) || defined(__ACLIC__)
 // with "root" subdir (include/root lib/root etc)
-// #  define _ROOT_INCLUDE_PREFIX      1
-// #  define _ROOT_LIB_PREFIX          1
+#  define _ROOT_INCLUDE_PREFIX      1
+#  define _ROOT_LIB_PREFIX          1
 // # endif /* defined(__CINT__) || defined(__CLING__) || defined(__ACLIC__) */
 # endif
 
