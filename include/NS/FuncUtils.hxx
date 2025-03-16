@@ -4,7 +4,7 @@
 
 # include "NSUtilsCF.h"
 
-# ifdef _WIN32
+# if (defined _WIN32 || defined _WIN64)
 #  include "NS_Win.h"
 # endif
 # include <stdlib.h>

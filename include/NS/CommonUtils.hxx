@@ -2,8 +2,6 @@
 #ifndef __COMMON_UTILS_HXX__
 # define __COMMON_UTILS_HXX__
 
-# include "NSUtilsCF.h"
-
 # if (defined _WIN32 || defined _WIN64)
 #  include "NS_Win.h"
 # endif

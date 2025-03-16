@@ -3,16 +3,12 @@
 # define _NS_DIRENT_H_
 
 # if (defined _WIN32 || defined _WIN64)
-#  ifdef __CEROOT__
-//#  if (defined __CINT__ || defined __CLING__ || defined __ACLIC__)
-#   if (defined Build_CommonUtils_Lib || defined Build_FuncUtils_Lib || defined Build_SpectrumUtils_Lib)
-#    include <dirent.h>
-#	else
-#	 include "root-win/root_dirent.h"
-#   endif /* !defined(Build_*Utils_Lib) */
+#  if (defined __CINT__ || defined __CLING__ || defined __ACLIC__)
+/* __CINT__ in ROOT5, __CLING__ in ROOT6 */
+#	include "root-win/dirent.h"
 #  else
-#   include <dirent.h>
-#  endif /* !defined(__CEROOT__) */
+#    include <dirent.h>
+#  endif
 # else
 #  include <dirent.h>
 # endif
