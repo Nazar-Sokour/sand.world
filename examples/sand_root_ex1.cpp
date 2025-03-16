@@ -2,7 +2,7 @@
 /*
  *  This example demonstrates how you can work with the sand procedure in the ROOT framework.
  *  Required library: SpectrumUtils.
- *  Load and execute in CLING: .L sand_root_ex1.cpp, sand_root_ex1()
+ *  Load and execute in ROOT session: .L sand_root_ex1.cpp, sand_root_ex1()
  *
  *  The example consists of four parts:
  *  Part 1 - Put the initial spectrum into the 'NS_spectrum_root' structure.
@@ -15,9 +15,16 @@
 
 /* In this example, all functions with the prefix "NS_" are in 'SpectrumUtils' library */
 
+#include "NS/NSUtilsCF.h"
+
 /* The next includes are required by R__ADD_INCLUDE_PATH, R__ADD_LIBRARY_PATH and R__LOAD_LIBRARY ROOT macros */
-#include "root/Rtypes.h"
-#include "root/TROOT.h"
+#ifdef _ROOT_INCLUDE_PREFIX
+# include "root/Rtypes.h"
+# include "root/TROOT.h"
+#else
+# include "Rtypes.h"
+# include "TROOT.h"
+#endif
 
 /* We need to add the include path to 'SpectrumUtils' header.
  * In this example, we use R__ADD_INCLUDE_PATH root macro.
@@ -25,8 +32,13 @@
 R__ADD_INCLUDE_PATH(../include)
 #include "NS/SpectrumUtils.hxx"
 
-#include "root/TH1.h"
-#include "root/TFile.h"
+#ifdef _ROOT_INCLUDE_PREFIX
+# include "root/TH1.h"
+# include "root/TFile.h"
+#else
+# include "TH1.h"
+# include "TFile.h"
+#endif
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -36,6 +48,11 @@ R__ADD_INCLUDE_PATH(../include)
  * R__LOAD_LIBRARY ROOT macro for loading library.
  * Set the library path as an argument to R__ADD_LIBRARY_PATH according to your setup. */
 R__ADD_LIBRARY_PATH(../lib)
+#if (defined R__WIN64 || defined R__WIN32)
+/* In windows we additionaly need to load this two libraries */
+R__LOAD_LIBRARY(CommonUtils)
+R__LOAD_LIBRARY(UtilsUtils)
+#endif
 R__LOAD_LIBRARY(SpectrumUtils)
 
 #define IFILEROOT "sand_sp1.root"

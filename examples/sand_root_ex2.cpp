@@ -2,7 +2,7 @@
 /*
  *  This example demonstrates how you can work with the sand procedure in the ROOT framework.
  *  Required libraries: CommonUtils, FuncUtils, SpectrumUtils
- *  Load and execute in CLING: .L sand_root_ex2.cpp, sand_root_ex2()
+ *  Load and execute in ROOT session: .L sand_root_ex2.cpp, sand_root_ex2()
  *
  *  The example consists of six parts, covering the full cycle of work, from reading a spectrum from an external text file
  *  to writing the result into an output text file.
@@ -19,9 +19,16 @@
 
 /* Functions with the prefix "NS_" are in 'SpectrumUtils', 'CommounUtils' and 'FuncUtils' libraries */
 
+#include "NS/NSUtilsCF.h"
+
 /* The next includes are required by R__ADD_INCLUDE_PATH, R__ADD_LIBRARY_PATH and R__LOAD_LIBRARY ROOT macros */
-#include "root/Rtypes.h"
-#include "root/TROOT.h"
+#ifdef _ROOT_INCLUDE_PREFIX
+# include "root/Rtypes.h"
+# include "root/TROOT.h"
+#else
+# include "Rtypes.h"
+# include "TROOT.h"
+#endif
 
 /* We need to add the include path for 'SpectrumUtils', 'CommonUtils', and 'FuncUtils' headers.
  * In this example, we use R__ADD_INCLUDE_PATH ROOT macro.
@@ -31,8 +38,13 @@ R__ADD_INCLUDE_PATH(../include)
 #include "NS/CommonUtils.hxx"
 #include "NS/FuncUtils.hxx"
 
-#include "root/TH1.h"
-#include "root/TFile.h"
+#ifdef _ROOT_INCLUDE_PREFIX
+# include "root/TH1.h"
+# include "root/TFile.h"
+#else
+# include "TH1.h"
+# include "TFile.h"
+#endif
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -63,7 +75,7 @@ int sand_root_ex2()
 	{
 		NS_spectrum spectrumOld; // the structure for a spectrum with the initial calibration that should be converted into the spectrum with the new calibration
 		long opt; // an option for reading/writing a spectrum from/to a file
-		int ncolumns; // number of columns in the input file (see README for more details)
+		int ncolumns; // number of columns in the input file (see doc/man for more details)
 
 		/*
 		 * Part 1: Put the initial spectrum into 'NS_spectrum' structure.
@@ -143,7 +155,7 @@ int sand_root_ex2()
 
 	{
 		NS_spectrum spectrumNew; // a structure for the new spectrum with the new calibration
-		int ncolumns; // number of columns in the output file (see README for more details)
+		int ncolumns; // number of columns in the output file (see doc/man for more details)
 
 		/*
 		 * Part 6: Write the result into an output text file.
