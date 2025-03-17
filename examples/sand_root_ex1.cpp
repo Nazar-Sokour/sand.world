@@ -39,7 +39,7 @@ R__ADD_LIBRARY_PATH(../lib)
 #if (defined R__WIN64 || defined R__WIN32)
 /* In windows we additionaly need to load this two libraries */
 R__LOAD_LIBRARY(CommonUtils)
-R__LOAD_LIBRARY(UtilsUtils)
+R__LOAD_LIBRARY(FuncUtils)
 #endif
 R__LOAD_LIBRARY(SpectrumUtils)
 

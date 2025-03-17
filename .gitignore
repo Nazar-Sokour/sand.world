@@ -1,5 +1,6 @@
 
 build/**
-prj/
 examples/sand_output.dat
 examples/sand_output.root
+sand-win-x64-root.zip
+README
