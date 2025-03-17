@@ -1,8 +1,0 @@
-
-all files in this world are hard links, except:
-
-prj/
-.gitignore
-include\NS\NSUtilsCF.h
-
-this world is only for pushing to 'win-x64' branch
