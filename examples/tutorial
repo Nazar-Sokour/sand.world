@@ -1,0 +1,55 @@
+
+There are 3 examples: one for C/C++ compilers and two for executing in a ROOT session.
+
+Example for C/C++ compiler:
+Example #1:
+	sand_ex1.cpp
+	The example uses two external text files and creates a text file with the output spectrum.
+	Required external libraries:
+		CommonUtils
+			function NS_AbsBufCount()
+			function NS_AbsBufPtr()
+			function NS_AbstractTabCount()
+			function NS_AbstractTabPtrX()
+			function NS_ReadAbstractFile()
+			function NS_WriteAbstractFile()
+		FuncUtils
+			function NS_PolF()
+		SpectrumUtils
+			function NS_ReadCalibrationCoeffiecients()
+			function NS_SpectrumFini()
+			function NS_SpectrumInit()
+			function NS_SpectrumSAND()
+
+Examples for a ROOT session:
+Example #2:
+	sand_root_ex1.cpp
+	The example uses an external root file with the input spectrum, a text file with calibration coefficients
+	and, creates a root file with the output spectrum.
+	Required external libraries:
+		SpectrumUtils
+			function NS_ReadCalibrationCoeffiecients()
+			function NS_SpectrumRootFini()
+			function NS_SpectrumRootInit()
+			function NS_SpectrumSANDRoot()
+
+Example #3:
+	sand_root_ex2.cpp
+	The example uses an external text file with the input spectrum, creates a root file with the input spectrum and
+	a text file with the output spectrum.
+	Required external libraries:
+		CommonUtils
+			function NS_AbsBufCount()
+			function NS_AbsBufPtr()
+			function NS_AbsBufPushBack()
+			function NS_AbstractTabCount()
+			function NS_AbstractTabPushBack()
+			function NS_ReadAbstractFile()
+			function NS_WriteAbstractFile()
+		FuncUtils
+			function NS_PolF()
+		SpectrumUtils
+			function NS_SpectrumFini()
+			function NS_SpectrumInit()
+			function NS_SpectrumRootInit()
+			function NS_SpectrumSANDRoot()
