@@ -19,16 +19,9 @@
 
 /* Functions with the prefix "NS_" are in 'SpectrumUtils', 'CommounUtils' and 'FuncUtils' libraries */
 
-#include "NS/NSUtilsCF.h"
-
 /* The next includes are required by R__ADD_INCLUDE_PATH, R__ADD_LIBRARY_PATH and R__LOAD_LIBRARY ROOT macros */
-#ifdef _ROOT_INCLUDE_PREFIX
-# include "root/Rtypes.h"
-# include "root/TROOT.h"
-#else
-# include "Rtypes.h"
-# include "TROOT.h"
-#endif
+#include "Rtypes.h"
+#include "TROOT.h"
 
 /* We need to add the include path for 'SpectrumUtils', 'CommonUtils', and 'FuncUtils' headers.
  * In this example, we use R__ADD_INCLUDE_PATH ROOT macro.
@@ -38,13 +31,8 @@ R__ADD_INCLUDE_PATH(../include)
 #include "NS/CommonUtils.hxx"
 #include "NS/FuncUtils.hxx"
 
-#ifdef _ROOT_INCLUDE_PREFIX
-# include "root/TH1.h"
-# include "root/TFile.h"
-#else
-# include "TH1.h"
-# include "TFile.h"
-#endif
+#include "TH1.h"
+#include "TFile.h"
 
 #include <stdlib.h>
 #include <stdio.h>
