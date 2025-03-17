@@ -1,8 +1,9 @@
 
 .vscode
-build/**
 prj/vscode/
-prj/local/
+build/**
 lib/libSpectrumUtils.so
 examples/sand_output.dat
 examples/sand_output.root
+sand-unix.zip
+README
